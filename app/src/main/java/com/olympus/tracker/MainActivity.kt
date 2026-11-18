@@ -3,6 +3,9 @@ package com.olympus.tracker
 
 import android.app.Activity
 import android.os.Bundle
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
@@ -83,7 +86,21 @@ class MainActivity : Activity() {
 
         root.addView(label("OLYMPUS TRACKER", 25f))
         root.addView(label("Учёт спинов и бонусов", 14f))
-
+root.addView(button("ПЛАВАЮЩЕЕ ОКНО") {
+    if (!Settings.canDrawOverlays(this)) {
+        val intent = Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse("package:$packageName")
+        )
+        startActivity(intent)
+    } else {
+        Toast.makeText(
+            this,
+            "Разрешение получено",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+})
         val tabs = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
         }
