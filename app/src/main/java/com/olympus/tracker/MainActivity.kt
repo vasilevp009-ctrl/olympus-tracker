@@ -94,11 +94,13 @@ root.addView(button("ПЛАВАЮЩЕЕ ОКНО") {
         )
         startActivity(intent)
     } else {
-        Toast.makeText(
-            this,
-            "Разрешение получено",
-            Toast.LENGTH_SHORT
-        ).show()
+        
+
+startService(
+    Intent(this, OverlayService::class.java)
+)
+
+
     }
 })
         val tabs = LinearLayout(this).apply {
